@@ -1,7 +1,5 @@
 import { Routes } from '@angular/router';
 
-// export const routes: Routes = [];
-
 export const routes: Routes = [
   {
     path: '',
@@ -14,12 +12,5 @@ export const routes: Routes = [
       import('./features/tasks/pages/tasks/tasks.page').then(
         (m) => m.TasksPage
       ),
-  },
-  {
-    path: 'categories',
-    loadComponent: () =>
-      import('./features/categories/pages/categories/categories.page').then(
-        (m) => m.CategoriesPage
-      ),
-  },
+  }
 ];
