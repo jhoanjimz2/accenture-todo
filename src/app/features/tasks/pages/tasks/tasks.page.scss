@@ -1,0 +1,21 @@
+.actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.actions ion-button {
+  flex: 1;
+}
+.empty-state {
+  margin-top: 80px;
+  text-align: center;
+  color: var(--ion-color-medium);
+}
+ion-item {
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+}
+small {
+  color: var(--ion-color-primary);
+}

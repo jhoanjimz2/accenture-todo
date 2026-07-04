@@ -1,18 +1,79 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>tasks</ion-title>
+    <ion-title>
+      Mis tareas
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openCategoryManager()">
+        <ion-icon
+          slot="icon-only"
+          name="albums-outline">
+        </ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">tasks</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <ion-segment
+    [value]="selectedStatus()"
+    (ionChange)="onStatusChange($event.detail.value)">
+    <ion-segment-button value="ALL">
+      Todas
+    </ion-segment-button>
+    <ion-segment-button value="PENDING">
+      Pendientes
+    </ion-segment-button>
+    <ion-segment-button value="COMPLETED">
+      Completadas
+    </ion-segment-button>
+  </ion-segment>
+  <ion-item>
+    <ion-select
+      placeholder="Todas las categorías"
+      [value]="selectedCategoryId()"
+      (ionChange)="selectedCategoryId.set($event.detail.value)">
 
+      <ion-select-option [value]="null">
+        Todas
+      </ion-select-option>
+      @for(category of categoryService.categories(); track category.id){
+        <ion-select-option [value]="category.id">
+          {{ category.name }}
+        </ion-select-option>
+      }
+    </ion-select>
+  </ion-item>
 
-  <ion-button (click)="openCategoryManager()">
-    Categorías
-  </ion-button>
+  @if(taskService.tasks().length === 0){
+    <div class="empty-state">
+      <h2>
+        No hay tareas
+      </h2>
+      <p>
+        Crea tu primera tarea.
+      </p>
+    </div>
+
+  }@else{
+    <app-task-list
+      [tasks]="filteredTasks()"
+      [categories]="categoryService.categories()"
+      (toggleCompleted)="taskService.toggleCompleted($event)"
+      (edit)="editTask($event)"
+      (delete)="deleteTask($event)">
+    </app-task-list>
+  }
+  <ion-fab
+    slot="fixed"
+    vertical="bottom"
+    horizontal="end">
+    <ion-fab-button
+      (click)="openTaskForm()">
+      <ion-icon
+        name="add-outline">
+      </ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 </ion-content>

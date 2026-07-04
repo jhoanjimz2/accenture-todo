@@ -1,3 +1,11 @@
-<p>
-  task-list works!
-</p>
+<ion-list>
+  @for(task of tasks; track task.id){
+    <app-task-item
+      [task]="task"
+      [categoryName]="getCategoryName(task.categoryId)"
+      (toggleCompleted)="toggleCompleted.emit(task.id)"
+      (edit)="edit.emit(task)"
+      (delete)="delete.emit(task)">
+    </app-task-item>
+  }
+</ion-list>
