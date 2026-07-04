@@ -1,0 +1,7 @@
+{
+  "name": "accenture-todo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
