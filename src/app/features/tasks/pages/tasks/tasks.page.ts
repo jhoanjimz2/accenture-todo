@@ -7,12 +7,19 @@ import {
   IonHeader,
   IonTitle,
   IonToolbar,
-  ModalController, IonButtons, IonIcon, IonFabButton, IonFab,
+  ModalController,
+  IonButtons,
+  IonIcon,
+  IonFabButton,
+  IonFab,
   IonSegment,
   IonSegmentButton,
   IonSelect,
   IonSelectOption,
-  IonItem} from '@ionic/angular/standalone';
+  IonItem,
+  IonSkeletonText,
+  IonLabel
+} from '@ionic/angular/standalone';
 import { CategoryManagerModalComponent }                                               from 'src/app/features/categories/components/category-manager-modal/category-manager-modal.component';
 import { CategoryService }                                                             from '../../../categories/services/category.service';
 import { TaskService }                                                                 from '../../services/task.service';
@@ -21,6 +28,7 @@ import { Task }                                                                 
 import { TaskListComponent }                                                           from '../../components/task-list/task-list.component';
 import { addIcons }                                                                    from 'ionicons';
 import { addOutline, albumsOutline }                                                   from 'ionicons/icons';
+import { RemoteConfigService }                                                         from 'src/app/core/firebase/remote-config.service';
 
 @Component({
   selector: 'app-tasks',
@@ -44,7 +52,9 @@ import { addOutline, albumsOutline }                                            
     IonSegmentButton,
     IonSelect,
     IonSelectOption,
-    IonItem
+    IonItem,
+    IonLabel,
+    IonSkeletonText
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -55,7 +65,8 @@ export class TasksPage implements OnInit {
   constructor(
     private readonly modalController: ModalController,
     public readonly categoryService: CategoryService,
-    public readonly taskService: TaskService
+    public readonly taskService: TaskService,
+    public readonly remoteConfigService: RemoteConfigService
   ) {
     addIcons({
       addOutline,
@@ -64,8 +75,11 @@ export class TasksPage implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    await this.categoryService.load();
-    await this.taskService.load();
+    await Promise.all([
+      this.remoteConfigService.load(),
+      this.categoryService.load(),
+      this.taskService.load(),
+    ]);
   }
 
   readonly filteredTasks = computed(() => {

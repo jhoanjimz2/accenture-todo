@@ -6,9 +6,7 @@ import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
   imports: [IonApp, IonRouterOutlet],
   template: `
     <ion-app>
-      <ion-router-outlet>
-        <p>Hola mundo</p>
-      </ion-router-outlet>
+      <ion-router-outlet></ion-router-outlet>
     </ion-app>
   `
 })

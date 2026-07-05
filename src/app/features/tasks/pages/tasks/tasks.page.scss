@@ -19,3 +19,27 @@ ion-item {
 small {
   color: var(--ion-color-primary);
 }
+.loading-spinner {
+  display: block;
+  margin: 200px auto;
+}
+.skeleton-title {
+  width: 140px;
+}
+.skeleton-segment {
+  width: 100%;
+  height: 42px;
+  border-radius: 12px;
+}
+.skeleton-filter {
+  width: 100%;
+  height: 48px;
+  margin-top: 16px;
+  border-radius: 12px;
+}
+.skeleton-task-title {
+  width: 60%;
+}
+.skeleton-task-category {
+  width: 35%;
+}

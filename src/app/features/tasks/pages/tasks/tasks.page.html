@@ -1,79 +1,99 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Mis tareas
-    </ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="openCategoryManager()">
-        <ion-icon
-          slot="icon-only"
-          name="albums-outline">
-        </ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content class="ion-padding">
-  <ion-segment
-    [value]="selectedStatus()"
-    (ionChange)="onStatusChange($event.detail.value)">
-    <ion-segment-button value="ALL">
-      Todas
-    </ion-segment-button>
-    <ion-segment-button value="PENDING">
-      Pendientes
-    </ion-segment-button>
-    <ion-segment-button value="COMPLETED">
-      Completadas
-    </ion-segment-button>
-  </ion-segment>
-  <ion-item>
-    <ion-select
-      placeholder="Todas las categorías"
-      [value]="selectedCategoryId()"
-      (ionChange)="selectedCategoryId.set($event.detail.value)">
-
-      <ion-select-option [value]="null">
-        Todas
-      </ion-select-option>
-      @for(category of categoryService.categories(); track category.id){
-        <ion-select-option [value]="category.id">
-          {{ category.name }}
-        </ion-select-option>
+@if (!remoteConfigService.loading()) {
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        Mis tareas
+      </ion-title>
+      @if (remoteConfigService.enableCategories()) {
+        <ion-buttons slot="end">
+          <ion-button fill="clear" (click)="openCategoryManager()">
+            <ion-icon
+              slot="icon-only"
+              name="albums-outline">
+            </ion-icon>
+          </ion-button>
+        </ion-buttons>
       }
-    </ion-select>
-  </ion-item>
-
-  @if(taskService.tasks().length === 0){
-    <div class="empty-state">
-      <h2>
-        No hay tareas
-      </h2>
-      <p>
-        Crea tu primera tarea.
-      </p>
-    </div>
-
-  }@else{
-    <app-task-list
-      [tasks]="filteredTasks()"
-      [categories]="categoryService.categories()"
-      (toggleCompleted)="taskService.toggleCompleted($event)"
-      (edit)="editTask($event)"
-      (delete)="deleteTask($event)">
-    </app-task-list>
-  }
-  <ion-fab
-    slot="fixed"
-    vertical="bottom"
-    horizontal="end">
-    <ion-fab-button
-      (click)="openTaskForm()">
-      <ion-icon
-        name="add-outline">
-      </ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
-</ion-content>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-segment
+      [value]="selectedStatus()"
+      (ionChange)="onStatusChange($event.detail.value)">
+      <ion-segment-button value="ALL">
+        Todas
+      </ion-segment-button>
+      <ion-segment-button value="PENDING">
+        Pendientes
+      </ion-segment-button>
+      <ion-segment-button value="COMPLETED">
+        Completadas
+      </ion-segment-button>
+    </ion-segment>
+    @if (remoteConfigService.enableCategories()) {
+      <ion-item>
+        <ion-select
+          placeholder="Todas las categorías"
+          [value]="selectedCategoryId()"
+          (ionChange)="selectedCategoryId.set($event.detail.value)">
+          <ion-select-option [value]="null">
+            Todas
+          </ion-select-option>
+          @for (category of categoryService.categories(); track category.id) {
+            <ion-select-option [value]="category.id">
+              {{ category.name }}
+            </ion-select-option>
+          }
+        </ion-select>
+      </ion-item>
+    }
+    @if (taskService.tasks().length === 0) {
+      <div class="empty-state">
+        <h2>No hay tareas</h2>
+        <p>Crea tu primera tarea.</p>
+      </div>
+    } @else {
+      <app-task-list
+        [tasks]="filteredTasks()"
+        [categories]="categoryService.categories()"
+        (toggleCompleted)="taskService.toggleCompleted($event)"
+        (edit)="editTask($event)"
+        (delete)="deleteTask($event)">
+      </app-task-list>
+    }
+    <ion-fab
+      slot="fixed"
+      vertical="bottom"
+      horizontal="end">
+      <ion-fab-button (click)="openTaskForm()">
+        <ion-icon name="add-outline">
+        </ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </ion-content>
+} @else {
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <ion-skeleton-text animated class="skeleton-title">
+        </ion-skeleton-text>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-skeleton-text animated class="skeleton-segment">
+    </ion-skeleton-text>
+    <ion-skeleton-text animated class="skeleton-filter">
+    </ion-skeleton-text>
+    @for (item of [1, 2, 3, 4]; track item) {
+      <ion-item>
+        <ion-label>
+          <ion-skeleton-text animated class="skeleton-task-title">
+          </ion-skeleton-text>
+          <ion-skeleton-text animated class="skeleton-task-category">
+          </ion-skeleton-text>
+        </ion-label>
+      </ion-item>
+    }
+  </ion-content>
+}
