@@ -17,7 +17,7 @@ Antes de ejecutar el proyecto asegúrate de tener instalado:
 ## 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/USUARIO/accenture-todo.git
+git clone https://github.com/jhoanjimz2/accenture-todo
 ```
 
 Entrar al proyecto
