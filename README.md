@@ -1,4 +1,4 @@
-> **Nota:** Aunque el enunciado de la prueba menciona Cordova, este proyecto fue desarrollado utilizando **Capacitor 8**, la solución oficialmente recomendada por el equipo de Ionic para aplicaciones híbridas modernas. La aplicación ha sido validada correctamente en **Web, Android e iOS**.
+> **Importante:** Aunque el enunciado de la prueba menciona Cordova, desarrollé el proyecto utilizando **Capacitor 8**, ya que es la solución recomendada actualmente por Ionic para el desarrollo de aplicaciones híbridas. La aplicación fue probada correctamente en Web, Android e iOS.
 
 # Instalación
 
@@ -22,7 +22,7 @@ Antes de ejecutar el proyecto asegúrate de tener instalado:
 git clone https://github.com/jhoanjimz2/accenture-todo.git
 ```
 
-Entrar al proyecto
+Ingresar a la carpeta del proyecto.
 
 ```bash
 cd accenture-todo
@@ -40,15 +40,15 @@ npm install
 
 ## 3. Configurar Firebase
 
-Por motivos de seguridad, el archivo con la configuración real de Firebase **no está incluido** en el repositorio.
+Por seguridad, el archivo con la configuración real de Firebase no se encuentra incluido en el repositorio.
 
-Se proporciona un archivo de ejemplo:
+Se dejó un archivo de ejemplo en la siguiente ruta:
 
 ```text
 src/app/core/firebase/firebase.config-example.ts
 ```
 
-### Pasos para configurarlo
+### Configuración
 
 1. Crear un proyecto en Firebase.
 
@@ -66,7 +66,7 @@ por:
 src/app/core/firebase/firebase.config.ts
 ```
 
-4. Reemplazar los valores del objeto `firebaseConfig` con la configuración de tu proyecto.
+4. Reemplazar los datos del objeto `firebaseConfig` por los correspondientes a tu proyecto.
 
 Ejemplo:
 
@@ -81,19 +81,19 @@ export const firebaseConfig = {
 };
 ```
 
-> **Nota:** El archivo `firebase.config.ts` está incluido en el `.gitignore`, por lo que cada desarrollador debe crear su propia configuración local utilizando `firebase.config-example.ts` como plantilla.
+> **Importante:** El archivo `firebase.config.ts` está incluido en el `.gitignore`, por lo que no se publica la configuración del proyecto de Firebase. Solo debes renombrar `firebase.config-example.ts` y reemplazar los datos por los de tu propio proyecto.
 
 ---
 
 ## 4. Configurar Firebase Remote Config
 
-En Firebase Console habilita **Remote Config** y crea el siguiente parámetro:
+Dentro de Firebase Console habilita **Remote Config** y crea el siguiente parámetro:
 
 | Parámetro | Valor |
 |-----------|-------|
 | `enable_categories` | `true` |
 
-Finalmente, publica los cambios.
+Una vez creado, publica los cambios.
 
 ---
 
@@ -139,7 +139,7 @@ npx cap open android
 
 ## 4. Ejecutar
 
-Seleccionar un dispositivo físico o un emulador y presionar **Run ▶**.
+Selecciona un dispositivo físico o un emulador y ejecuta la aplicación desde el botón **Run ▶**.
 
 ---
 
@@ -155,7 +155,7 @@ Build Bundle(s) / APK(s)
 Build APK(s)
 ```
 
-El APK será generado en:
+El APK se generará en la siguiente ruta:
 
 ```text
 android/app/build/outputs/apk/debug/app-debug.apk
@@ -191,41 +191,41 @@ npx cap open ios
 
 ## 4. Ejecutar
 
-Seleccionar un simulador y presionar **Run ▶**.
+Selecciona un simulador y ejecuta la aplicación desde el botón **Run ▶**.
 
 ---
 
-## Nota sobre el IPA
+## Sobre el archivo IPA
 
-El proyecto compila y se ejecuta correctamente en Xcode.
+No fue posible generar el archivo IPA porque no cuento con una cuenta de Apple Developer para realizar la firma de la aplicación.
 
-La generación de un archivo **IPA firmado para distribución** requiere una cuenta de **Apple Developer** para realizar el proceso de firma (Code Signing). Por esta razón, únicamente se valida la ejecución de la aplicación en el simulador de iOS.
+Sin embargo, el proyecto fue probado y ejecutado correctamente en el simulador de iOS desde Xcode.
 
 ---
 
 # Actualizar la aplicación después de realizar cambios
 
-Después de modificar el código fuente ejecutar:
+Después de realizar cualquier modificación en el proyecto ejecuta:
 
 ```bash
 ionic build
 ```
 
-Luego sincronizar Capacitor.
+Luego sincroniza Capacitor.
 
-Android:
+Android
 
 ```bash
 npx cap sync android
 ```
 
-iOS:
+iOS
 
 ```bash
 npx cap sync ios
 ```
 
-Si los proyectos nativos ya están abiertos, volver a compilarlos desde Android Studio o Xcode.
+Si Android Studio o Xcode ya están abiertos, simplemente vuelve a ejecutar la aplicación.
 
 ---
 
@@ -289,3 +289,70 @@ src/
 ├── assets/
 └── environments/
 ```
+
+
+---
+
+# Capturas de pantalla
+
+## Pantalla principal
+
+Vista principal de la aplicación con todas las tareas registradas.
+
+![Pantalla principal](docs/screenshots/home_full_task.png)
+
+---
+
+## Gestión de categorías
+
+Administración de categorías (crear, editar y eliminar).
+
+![Categorías](docs/screenshots/categorias.png)
+
+---
+
+## Tareas pendientes
+
+Visualización del filtro de tareas pendientes.
+
+![Pendientes](docs/screenshots/home_pendientes.png)
+
+---
+
+## Tareas completadas
+
+Visualización del filtro de tareas completadas.
+
+![Completadas](docs/screenshots/home_completadas.png)
+
+---
+
+## Filtro por categoría (Frontend)
+
+Listado de tareas filtradas por la categoría **Frontend**.
+
+![Frontend](docs/screenshots/home_filter_frontend.png)
+
+---
+
+## Filtro por categoría (Backend)
+
+Listado de tareas filtradas por la categoría **Backend**.
+
+![Backend](docs/screenshots/home_filter_backend.png)
+
+---
+
+## Estado inicial
+
+Pantalla mostrada cuando aún no existen tareas registradas.
+
+![Estado inicial](docs/screenshots/home_init.png)
+
+---
+
+## Formulario de categoría
+
+Formulario para crear una nueva categoría.
+
+![Nueva categoría](docs/screenshots/form_new_category.png)
