@@ -11,7 +11,7 @@ $RECYCLE.BIN/
 
 *.log
 log.txt
-
+src/app/core/firebase/firebase.config.ts
 
 /.sourcemaps
 /.versions
