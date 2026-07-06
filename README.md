@@ -1,3 +1,5 @@
+> **Nota:** Aunque el enunciado de la prueba menciona Cordova, este proyecto fue desarrollado utilizando **Capacitor 8**, la solución oficialmente recomendada por el equipo de Ionic para aplicaciones híbridas modernas. La aplicación ha sido validada correctamente en **Web, Android e iOS**.
+
 # Instalación
 
 ## Requisitos previos
@@ -17,7 +19,7 @@ Antes de ejecutar el proyecto asegúrate de tener instalado:
 ## 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/jhoanjimz2/accenture-todo
+git clone https://github.com/jhoanjimz2/accenture-todo.git
 ```
 
 Entrar al proyecto
@@ -38,43 +40,60 @@ npm install
 
 ## 3. Configurar Firebase
 
-Crear un proyecto en Firebase.
+Por motivos de seguridad, el archivo con la configuración real de Firebase **no está incluido** en el repositorio.
 
-Habilitar:
+Se proporciona un archivo de ejemplo:
 
-- Firebase App
-- Remote Config
-
-Copiar la configuración de Firebase dentro del archivo:
-
+```text
+src/app/core/firebase/firebase.config-example.ts
 ```
+
+### Pasos para configurarlo
+
+1. Crear un proyecto en Firebase.
+
+2. Registrar una aplicación Web.
+
+3. Renombrar el archivo:
+
+```text
+src/app/core/firebase/firebase.config-example.ts
+```
+
+por:
+
+```text
 src/app/core/firebase/firebase.config.ts
 ```
+
+4. Reemplazar los valores del objeto `firebaseConfig` con la configuración de tu proyecto.
 
 Ejemplo:
 
 ```ts
 export const firebaseConfig = {
-  apiKey: "...",
-  authDomain: "...",
-  projectId: "...",
-  storageBucket: "...",
-  messagingSenderId: "...",
-  appId: "..."
+  apiKey: 'TU_API_KEY',
+  authDomain: 'TU_AUTH_DOMAIN',
+  projectId: 'TU_PROJECT_ID',
+  storageBucket: 'TU_STORAGE_BUCKET',
+  messagingSenderId: 'TU_MESSAGING_SENDER_ID',
+  appId: 'TU_APP_ID',
 };
 ```
 
+> **Nota:** El archivo `firebase.config.ts` está incluido en el `.gitignore`, por lo que cada desarrollador debe crear su propia configuración local utilizando `firebase.config-example.ts` como plantilla.
+
 ---
 
-## 4. Configurar Remote Config
+## 4. Configurar Firebase Remote Config
 
-En Firebase Console crear el parámetro:
+En Firebase Console habilita **Remote Config** y crea el siguiente parámetro:
 
 | Parámetro | Valor |
 |-----------|-------|
-| enable_categories | true |
+| `enable_categories` | `true` |
 
-Publicar los cambios.
+Finalmente, publica los cambios.
 
 ---
 
@@ -86,7 +105,7 @@ ionic serve
 
 La aplicación estará disponible en:
 
-```
+```text
 http://localhost:8100
 ```
 
@@ -120,13 +139,7 @@ npx cap open android
 
 ## 4. Ejecutar
 
-Seleccionar un dispositivo físico o un emulador.
-
-Presionar:
-
-```
-Run ▶
-```
+Seleccionar un dispositivo físico o un emulador y presionar **Run ▶**.
 
 ---
 
@@ -134,21 +147,17 @@ Run ▶
 
 Desde Android Studio:
 
-```
+```text
 Build
-
-↓
-
+    ↓
 Build Bundle(s) / APK(s)
-
-↓
-
+    ↓
 Build APK(s)
 ```
 
-El APK quedará en:
+El APK será generado en:
 
-```
+```text
 android/app/build/outputs/apk/debug/app-debug.apk
 ```
 
@@ -182,13 +191,7 @@ npx cap open ios
 
 ## 4. Ejecutar
 
-Seleccionar un simulador.
-
-Presionar:
-
-```
-Run ▶
-```
+Seleccionar un simulador y presionar **Run ▶**.
 
 ---
 
@@ -196,7 +199,7 @@ Run ▶
 
 El proyecto compila y se ejecuta correctamente en Xcode.
 
-La generación de un archivo IPA firmado requiere una cuenta de Apple Developer para realizar la firma de distribución.
+La generación de un archivo **IPA firmado para distribución** requiere una cuenta de **Apple Developer** para realizar el proceso de firma (Code Signing). Por esta razón, únicamente se valida la ejecución de la aplicación en el simulador de iOS.
 
 ---
 
@@ -208,15 +211,15 @@ Después de modificar el código fuente ejecutar:
 ionic build
 ```
 
-Luego sincronizar Capacitor:
+Luego sincronizar Capacitor.
 
-Android
+Android:
 
 ```bash
 npx cap sync android
 ```
 
-iOS
+iOS:
 
 ```bash
 npx cap sync ios
@@ -268,7 +271,7 @@ npx cap open ios
 
 # Estructura del proyecto
 
-```
+```text
 src/
 │
 ├── app/
